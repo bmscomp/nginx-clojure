@@ -1,0 +1,14 @@
+/Makefile
+*.o
+*.class
+*.so
+/target
+/bin
+.settings
+/.README.md.html
+/logs
+/temp
+/res
+/ngx-memoryleak
+/.lein-failures
+/pom.xml.asc

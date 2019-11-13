@@ -1,0 +1,11 @@
+{
+   "options": {"failByDrop": false},
+   "outdir": "./target/reports/clients",
+
+   "servers": [
+               {"agent": "nc-premsg", "url": "ws://localhost:8080/java-ws/echo", "options": {"version": 18}}
+              ],
+   "cases": ["6.*", "7.*"],
+   "exclude-cases": ["12.*", "13.*"],
+   "exclude-agent-cases": {}
+}
