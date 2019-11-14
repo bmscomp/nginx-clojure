@@ -117,7 +117,7 @@ after_failure:
 deploy:
   provider: releases
   api_key: $GITHUB_OAUTH_TOKEN
-  file: /home/who/git/nginx-clojure/*
+  file: /home/who/*
   skip_cleanup: true
   draft: true
 
