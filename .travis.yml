@@ -114,13 +114,6 @@ after_failure:
   - cat logs/error.log
   - echo "******************************** Test Failed (End of Nginx error.log)*******************"
 
-deploy:
-  provider: releases
-  api_key: $GITHUB_OAUTH_TOKEN
-  file: /home/who/*
-  skip_cleanup: true
-  draft: true
-
 
 notifications:
   email: false
