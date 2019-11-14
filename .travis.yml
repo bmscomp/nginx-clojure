@@ -114,6 +114,13 @@ after_failure:
   - cat logs/error.log
   - echo "******************************** Test Failed (End of Nginx error.log)*******************"
 
+deploy:
+  provider: releases
+  file: /home/who/git/nginx-clojure/*
+  skip_cleanup: true
+  draft: true
+
+
 notifications:
   email: false
   
