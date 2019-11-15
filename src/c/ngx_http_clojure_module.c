@@ -2193,6 +2193,7 @@ static ngx_int_t ngx_http_clojure_body_filter(ngx_http_request_t *r,  ngx_chain_
  *  where the return value of log handler will be ignored.
  */
 static ngx_int_t ngx_http_clojure_log_handler(ngx_http_request_t * r) {
+  ngx_int_t rc;
   ngx_http_clojure_module_ctx_t *ctx;
   ngx_http_clojure_loc_conf_t  *lcf = ngx_http_get_module_loc_conf(r, ngx_http_clojure_module);
 
@@ -2212,12 +2213,14 @@ static ngx_int_t ngx_http_clojure_log_handler(ngx_http_request_t * r) {
 
     ngx_http_clojure_init_ctx(ctx, NGX_HTTP_LOG_PHASE, r);
     ngx_http_set_ctx(r, ctx, ngx_http_clojure_module);
+    rc = ngx_http_clojure_eval(lcf->log_handler_id, r, 0);
 
     ngx_log_debug2(NGX_LOG_DEBUG_HTTP, ngx_http_clojure_global_cycle->log, 0, "ngx clojure log (null ctx) request: %" PRIu64 ", rc: %d", (jlong)(uintptr_t)r, rc);
     return NGX_OK;
   } else {
     ctx->hijacked_or_async = 0;
     ctx->phase = NGX_HTTP_LOG_PHASE;
+    rc = ngx_http_clojure_eval(lcf->log_handler_id, r, 0);
     ngx_log_debug2(NGX_LOG_DEBUG_HTTP, ngx_http_clojure_global_cycle->log, 0, "ngx clojure log (else) request: %" PRIu64 ", rc: %d", (jlong)(uintptr_t)r, rc);
     return NGX_OK;
   }
